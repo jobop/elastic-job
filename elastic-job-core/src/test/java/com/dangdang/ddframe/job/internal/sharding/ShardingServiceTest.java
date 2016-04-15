@@ -198,7 +198,7 @@ public final class ShardingServiceTest {
         when(curatorTransactionFinal.delete()).thenReturn(transactionDeleteBuilder);
         when(transactionDeleteBuilder.forPath("/testJob/leader/sharding/processing")).thenReturn(curatorTransactionBridge);
         when(curatorTransactionBridge.and()).thenReturn(curatorTransactionFinal);
-        Map<String, List<Integer>> shardingItems = new HashMap<>(1);
+        Map<String, List<Integer>> shardingItems = new HashMap<String, List<Integer>>(1);
         shardingItems.put("host0", Arrays.asList(0, 1, 2));
         ShardingService.PersistShardingInfoTransactionExecutionCallback actual = shardingService.new PersistShardingInfoTransactionExecutionCallback(shardingItems);
         actual.execute(curatorTransactionFinal);

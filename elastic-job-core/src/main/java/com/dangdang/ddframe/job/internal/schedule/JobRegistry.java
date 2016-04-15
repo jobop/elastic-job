@@ -37,9 +37,9 @@ public final class JobRegistry {
     
     private static volatile JobRegistry instance;
     
-    private Map<String, JobScheduler> schedulerMap = new ConcurrentHashMap<>();
+    private Map<String, JobScheduler> schedulerMap = new ConcurrentHashMap<String, JobScheduler>();
     
-    private ConcurrentHashMap<String, ElasticJob> instanceMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, ElasticJob> instanceMap = new ConcurrentHashMap<String, ElasticJob>();
     
     /**
      * 获取作业注册表实例.

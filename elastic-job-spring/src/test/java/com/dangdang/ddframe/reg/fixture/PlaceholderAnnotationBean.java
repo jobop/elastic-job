@@ -42,4 +42,54 @@ public class PlaceholderAnnotationBean {
     
     @Value("${withoutNamespace_2}")
     private String withoutNamespaceValue2;
+
+	public String getRegValue1() {
+		return regValue1;
+	}
+
+	public void setRegValue1(String regValue1) {
+		this.regValue1 = regValue1;
+	}
+
+	public String getRegValue2() {
+		return regValue2;
+	}
+
+	public void setRegValue2(String regValue2) {
+		this.regValue2 = regValue2;
+	}
+
+	public String getWithNamespaceValue1() {
+		return withNamespaceValue1;
+	}
+
+	public void setWithNamespaceValue1(String withNamespaceValue1) {
+		this.withNamespaceValue1 = withNamespaceValue1;
+	}
+
+	public String getWithNamespaceValue2() {
+		return withNamespaceValue2;
+	}
+
+	public void setWithNamespaceValue2(String withNamespaceValue2) {
+		this.withNamespaceValue2 = withNamespaceValue2;
+	}
+
+	public String getWithoutNamespaceValue1() {
+		return withoutNamespaceValue1;
+	}
+
+	public void setWithoutNamespaceValue1(String withoutNamespaceValue1) {
+		this.withoutNamespaceValue1 = withoutNamespaceValue1;
+	}
+
+	public String getWithoutNamespaceValue2() {
+		return withoutNamespaceValue2;
+	}
+
+	public void setWithoutNamespaceValue2(String withoutNamespaceValue2) {
+		this.withoutNamespaceValue2 = withoutNamespaceValue2;
+	}
+    
+    
 }

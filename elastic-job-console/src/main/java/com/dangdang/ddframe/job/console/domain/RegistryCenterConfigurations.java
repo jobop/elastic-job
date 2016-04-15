@@ -30,7 +30,7 @@ import lombok.Getter;
 @XmlAccessorType(XmlAccessType.FIELD)
 public final class RegistryCenterConfigurations {
     
-    private Set<RegistryCenterConfiguration> registryCenterConfiguration = new LinkedHashSet<>();
+    private Set<RegistryCenterConfiguration> registryCenterConfiguration = new LinkedHashSet<RegistryCenterConfiguration>();
 
 	public Set<RegistryCenterConfiguration> getRegistryCenterConfiguration() {
 		return registryCenterConfiguration;

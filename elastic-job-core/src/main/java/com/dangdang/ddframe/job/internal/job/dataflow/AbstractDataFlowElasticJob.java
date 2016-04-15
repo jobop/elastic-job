@@ -168,7 +168,7 @@ public abstract class AbstractDataFlowElasticJob<T, C extends AbstractJobExecuti
     
     private Map<Integer, List<T>> fetchDataForSequence(final JobExecutionMultipleShardingContext shardingContext) {
         List<Integer> items = shardingContext.getShardingItems();
-        final Map<Integer, List<T>> result = new ConcurrentHashMap<>(items.size());
+        final Map<Integer, List<T>> result = new ConcurrentHashMap<Integer, List<T>>(items.size());
         final CountDownLatch latch = new CountDownLatch(items.size());
         for (final int each : items) {
             executorService.submit(new Runnable() {

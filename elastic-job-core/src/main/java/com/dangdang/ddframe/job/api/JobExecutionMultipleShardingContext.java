@@ -43,17 +43,17 @@ public final class JobExecutionMultipleShardingContext extends AbstractJobExecut
     /**
      * 运行在本作业服务器的分片序列号集合.
      */
-    private List<Integer> shardingItems = new ArrayList<>(initCollectionSize);
+    private List<Integer> shardingItems = new ArrayList<Integer>(initCollectionSize);
     
     /**
      * 运行在本作业项的分片序列号和个性化参数列表.
      */
-    private Map<Integer, String> shardingItemParameters = new HashMap<>(initCollectionSize);
+    private Map<Integer, String> shardingItemParameters = new HashMap<Integer, String>(initCollectionSize);
     
     /**
      * 数据分片项和数据处理位置Map.
      */
-    private Map<Integer, String> offsets = new HashMap<>();
+    private Map<Integer, String> offsets = new HashMap<Integer, String>();
     
     /**
      * 根据分片项获取单分片作业运行时上下文.
@@ -65,8 +65,10 @@ public final class JobExecutionMultipleShardingContext extends AbstractJobExecut
         JobExecutionSingleShardingContext result = new JobExecutionSingleShardingContext();
         try {
             BeanUtils.copyProperties(result, this);
-        } catch (final IllegalAccessException | InvocationTargetException ex) {
+        } catch ( IllegalAccessException  ex) {
             throw new JobException(ex);
+        }catch(InvocationTargetException ex){
+        	   throw new JobException(ex);
         }
         result.setShardingItem(item);
         result.setShardingItemParameter(shardingItemParameters.get(item));

@@ -79,7 +79,7 @@ public class JobBeanDefinitionParser extends AbstractBeanDefinitionParser {
     
     private List<BeanDefinition> createJobListeners(final Element element) {
         List<Element> listenerElements = DomUtils.getChildElementsByTagName(element, "listener");
-        List<BeanDefinition> result = new ManagedList<>(listenerElements.size());
+        List<BeanDefinition> result = new ManagedList<BeanDefinition>(listenerElements.size());
         for (Element each : listenerElements) {
             String className = each.getAttribute("class");
             BeanDefinitionBuilder factory = BeanDefinitionBuilder.rootBeanDefinition(className);

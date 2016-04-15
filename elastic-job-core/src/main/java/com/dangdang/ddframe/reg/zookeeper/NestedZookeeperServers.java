@@ -44,7 +44,7 @@ public final class NestedZookeeperServers {
     
     private static NestedZookeeperServers instance = new NestedZookeeperServers();
     
-    private static ConcurrentMap<Integer, TestingServer> nestedServers = new ConcurrentHashMap<>();
+    private static ConcurrentMap<Integer, TestingServer> nestedServers = new ConcurrentHashMap<Integer, TestingServer>();
     
     /**
      * 获取单例实例.

@@ -42,14 +42,14 @@ public final class AverageAllocationJobShardingStrategyTest {
     
     @Test
     public void shardingForOneServer() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(1);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(1);
         expected.put("host0", Arrays.asList(0, 1, 2));
         assertThat(jobShardingStrategy.sharding(Collections.singletonList("host0"), getJobShardingStrategyOption(3)), is(expected));
     }
     
     @Test
     public void shardingForServersMoreThanShardingCount() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Collections.singletonList(0));
         expected.put("host1", Collections.singletonList(1));
         expected.put("host2", Collections.<Integer>emptyList());
@@ -58,7 +58,7 @@ public final class AverageAllocationJobShardingStrategyTest {
     
     @Test
     public void shardingForServersLessThanShardingCountAliquot() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Arrays.asList(0, 1, 2));
         expected.put("host1", Arrays.asList(3, 4, 5));
         expected.put("host2", Arrays.asList(6, 7, 8));
@@ -67,7 +67,7 @@ public final class AverageAllocationJobShardingStrategyTest {
     
     @Test
     public void shardingForServersLessThanShardingCountAliquantFor8ShardingCountAnd3Servers() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Arrays.asList(0, 1, 6));
         expected.put("host1", Arrays.asList(2, 3, 7));
         expected.put("host2", Arrays.asList(4, 5));
@@ -76,7 +76,7 @@ public final class AverageAllocationJobShardingStrategyTest {
     
     @Test
     public void shardingForServersLessThanShardingCountAliquantFor10ShardingCountAnd3Servers() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Arrays.asList(0, 1, 2, 9));
         expected.put("host1", Arrays.asList(3, 4, 5));
         expected.put("host2", Arrays.asList(6, 7, 8));

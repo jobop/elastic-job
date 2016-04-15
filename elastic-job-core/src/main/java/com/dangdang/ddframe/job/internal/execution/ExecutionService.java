@@ -154,7 +154,7 @@ public class ExecutionService {
      * @return 标记被错过执行的任务分片项
      */
     public List<Integer> getMisfiredJobItems(final List<Integer> items) {
-        List<Integer> result = new ArrayList<>(items.size());
+        List<Integer> result = new ArrayList<Integer>(items.size());
         for (int each : items) {
             if (jobNodeStorage.isJobNodeExisted(ExecutionNode.getMisfireNode(each))) {
                 result.add(each);

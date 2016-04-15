@@ -17,11 +17,12 @@
 
 package com.dangdang.ddframe.reg.spring.placeholder;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import lombok.extern.slf4j.Slf4j;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.PropertySources;
@@ -32,9 +33,8 @@ import org.springframework.core.env.PropertySourcesPropertyResolver;
  * 
  * @author zhangliang
  */
-@Slf4j
 public final class PlaceholderResolved {
-    
+    private Logger log=LoggerFactory.getLogger(PlaceholderResolved.class);
     private final Map<String, PropertySourcesPlaceholderConfigurer> placeholderMap;
     
     public PlaceholderResolved(final ListableBeanFactory beanFactory) {
@@ -61,7 +61,8 @@ public final class PlaceholderResolved {
             } catch (final NoSuchMethodError ex) {
                 try {
                     propertyResolver = getPropertyResolverBeforeSpring4(entry.getValue());
-                } catch (final ReflectiveOperationException e) {
+                    //FIXME:
+                } catch (Exception e) {
                     log.warn("Cannot get placeholder resolver.");
                     return text;
                 }
@@ -78,7 +79,15 @@ public final class PlaceholderResolved {
         throw missingException;
     }
     
-    private PropertySourcesPropertyResolver getPropertyResolverBeforeSpring4(final PropertySourcesPlaceholderConfigurer placeholderConfigurer) throws ReflectiveOperationException {
-        return new PropertySourcesPropertyResolver((PropertySources) PropertySourcesPlaceholderConfigurer.class.getField("propertySources").get(placeholderConfigurer));
+
+    private PropertySourcesPropertyResolver getPropertyResolverBeforeSpring4(final PropertySourcesPlaceholderConfigurer placeholderConfigurer) throws Exception {
+    	Field   fields[]   =   PropertySourcesPlaceholderConfigurer.class.getDeclaredFields(); 
+    	Field.setAccessible(fields,   true); 
+    	for (Field field : fields) {
+			if("propertySources".equals(field.getName())){
+				return new PropertySourcesPropertyResolver((PropertySources) field.get(placeholderConfigurer));
+			}
+		}
+    	return null;
     }
 }

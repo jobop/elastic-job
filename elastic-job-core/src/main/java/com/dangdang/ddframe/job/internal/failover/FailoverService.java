@@ -105,7 +105,7 @@ public class FailoverService {
      */
     public List<Integer> getLocalHostFailoverItems() {
         List<String> items = jobNodeStorage.getJobNodeChildrenKeys(ExecutionNode.ROOT);
-        List<Integer> result = new ArrayList<>(items.size());
+        List<Integer> result = new ArrayList<Integer>(items.size());
         String ip = localHostService.getIp();
         for (String each : items) {
             int item = Integer.parseInt(each);
@@ -125,7 +125,7 @@ public class FailoverService {
      */
     public List<Integer> getLocalHostTakeOffItems() {
         List<Integer> shardingItems = shardingService.getLocalHostShardingItems();
-        List<Integer> result = new ArrayList<>(shardingItems.size());
+        List<Integer> result = new ArrayList<Integer>(shardingItems.size());
         for (int each : shardingItems) {
             if (jobNodeStorage.isJobNodeExisted(FailoverNode.getExecutionFailoverNode(each))) {
                 result.add(each);

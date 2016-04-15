@@ -98,7 +98,7 @@ public class ConfigurationService {
             return Collections.emptyMap();
         }
         String[] shardingItemParameters = value.split(",");
-        Map<Integer, String> result = new HashMap<>(shardingItemParameters.length);
+        Map<Integer, String> result = new HashMap<Integer, String>(shardingItemParameters.length);
         for (String each : shardingItemParameters) {
             String[] pair = each.trim().split("=");
             if (2 != pair.length) {

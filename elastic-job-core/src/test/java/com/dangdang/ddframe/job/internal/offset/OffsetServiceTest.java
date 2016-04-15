@@ -64,7 +64,7 @@ public final class OffsetServiceTest {
         when(jobNodeStorage.getJobNodeDataDirectly("offset/0")).thenReturn("offset0");
         when(jobNodeStorage.getJobNodeDataDirectly("offset/1")).thenReturn("");
         when(jobNodeStorage.getJobNodeDataDirectly("offset/2")).thenReturn("offset2");
-        Map<Integer, String> expected = new HashMap<>(1);
+        Map<Integer, String> expected = new HashMap<Integer, String>(1);
         expected.put(0, "offset0");
         assertThat(offsetService.getOffsets(Arrays.asList(0, 1)), is(expected));
         verify(jobNodeStorage).getJobNodeDataDirectly("offset/0");

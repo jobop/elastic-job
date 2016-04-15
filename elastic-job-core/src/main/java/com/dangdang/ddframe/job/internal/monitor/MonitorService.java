@@ -44,110 +44,123 @@ import com.google.common.base.Joiner;
  * @author caohao
  */
 public class MonitorService {
-	private Logger log=LoggerFactory.getLogger(this.getClass());
-    public static final String DUMP_COMMAND = "dump";
-    
-    private final String jobName;
-    
-    private final CoordinatorRegistryCenter coordinatorRegistryCenter;
-    
-    private final ConfigurationService configService;
-    
-    private ServerSocket serverSocket;
-    
-    private volatile boolean closed;
-    
-    public MonitorService(final CoordinatorRegistryCenter coordinatorRegistryCenter, final JobConfiguration jobConfiguration) {
-        jobName = jobConfiguration.getJobName();
-        this.coordinatorRegistryCenter = coordinatorRegistryCenter;
-        configService = new ConfigurationService(coordinatorRegistryCenter, jobConfiguration);
-    }
-    
-    /**
-     * 初始化作业监听服务.
-     */
-    public void listen() {
-        int port = configService.getMonitorPort();
-        if (port < 0) {
-            return;
-        }
-        try {
-            log.info("Elastic job: monitor service is running, the port is '{}'", port);
-            openSocketForMonitor(port);
-        } catch (final IOException ex) {
-            log.warn(ex.getMessage());
-        }
-    }
-    
-    private void openSocketForMonitor(final int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        new Thread() {
-            
-            @Override
-            public void run() {
-                while (!closed) {
-                    try {
-                        process(serverSocket.accept());
-                    } catch (final IOException ex) {
-                        log.warn(ex.getMessage());
-                    }
-                }
-            }
-        }.start();
-    }
-    
-    private void process(final Socket socket) {
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                Socket autoCloseSocket = socket) {
-            String cmdLine = reader.readLine();
-            if (null != cmdLine && DUMP_COMMAND.equalsIgnoreCase(cmdLine)) {
-                List<String> result = new ArrayList<>();
-                dumpDirectly("/" + jobName, result);
-                outputMessage(writer, Joiner.on("\n").join(SensitiveInfoUtils.filterSensitiveIps(result)) + "\n");
-            }
-        } catch (final IOException ex) {
-            log.warn(ex.getMessage());
-        }
-    }
-    
-    private void dumpDirectly(final String path, final List<String> result) {
-        for (String each : coordinatorRegistryCenter.getChildrenKeys(path)) {
-            String zkPath = path + "/" + each;
-            String zkValue = coordinatorRegistryCenter.get(zkPath);
-            if (null == zkValue) {
-                zkValue = "";
-            }
-            TreeCache treeCache = (TreeCache) coordinatorRegistryCenter.getRawCache("/" + jobName);
-            ChildData treeCacheData = treeCache.getCurrentData(zkPath);
-            String treeCachePath =  null == treeCacheData ? "" : treeCacheData.getPath();
-            String treeCacheValue = null == treeCacheData ? "" : new String(treeCacheData.getData());
-            if (zkValue.equals(treeCacheValue) && zkPath.equals(treeCachePath)) {
-                result.add(Joiner.on(" | ").join(zkPath, zkValue));
-            } else {
-                result.add(Joiner.on(" | ").join(zkPath, zkValue, treeCachePath, treeCacheValue));
-            }
-            dumpDirectly(zkPath, result);
-        }
-    }
-    
-    private void outputMessage(final BufferedWriter outputWriter, final String msg) throws IOException {
-        outputWriter.append(msg);
-        outputWriter.flush();
-    }
-    
-    /**
-     * 关闭作业监听服务.
-     */
-    public void close() {
-        closed = true;
-        if (null != serverSocket && !serverSocket.isClosed()) {
-            try {
-                serverSocket.close();
-            } catch (final IOException ex) {
-                log.warn(ex.getMessage());
-            }
-        }
-    }
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	public static final String DUMP_COMMAND = "dump";
+
+	private final String jobName;
+
+	private final CoordinatorRegistryCenter coordinatorRegistryCenter;
+
+	private final ConfigurationService configService;
+
+	private ServerSocket serverSocket;
+
+	private volatile boolean closed;
+
+	public MonitorService(final CoordinatorRegistryCenter coordinatorRegistryCenter, final JobConfiguration jobConfiguration) {
+		jobName = jobConfiguration.getJobName();
+		this.coordinatorRegistryCenter = coordinatorRegistryCenter;
+		configService = new ConfigurationService(coordinatorRegistryCenter, jobConfiguration);
+	}
+
+	/**
+	 * 初始化作业监听服务.
+	 */
+	public void listen() {
+		int port = configService.getMonitorPort();
+		if (port < 0) {
+			return;
+		}
+		try {
+			log.info("Elastic job: monitor service is running, the port is '{}'", port);
+			openSocketForMonitor(port);
+		} catch (final IOException ex) {
+			log.warn(ex.getMessage());
+		}
+	}
+
+	private void openSocketForMonitor(final int port) throws IOException {
+		serverSocket = new ServerSocket(port);
+		new Thread() {
+
+			@Override
+			public void run() {
+				while (!closed) {
+					try {
+						process(serverSocket.accept());
+					} catch (final IOException ex) {
+						log.warn(ex.getMessage());
+					}
+				}
+			}
+		}.start();
+	}
+
+	private void process(final Socket socket) {
+		BufferedReader reader = null;
+		BufferedWriter writer = null;
+		try {
+
+			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			Socket autoCloseSocket = socket;
+
+			String cmdLine = reader.readLine();
+			if (null != cmdLine && DUMP_COMMAND.equalsIgnoreCase(cmdLine)) {
+				List<String> result = new ArrayList<String>();
+				dumpDirectly("/" + jobName, result);
+				outputMessage(writer, Joiner.on("\n").join(SensitiveInfoUtils.filterSensitiveIps(result)) + "\n");
+			}
+		} catch (final IOException ex) {
+			log.warn(ex.getMessage());
+		} finally {
+			try {
+				reader.close();
+			} catch (Exception e) {
+			}
+			try {
+				writer.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	private void dumpDirectly(final String path, final List<String> result) {
+		for (String each : coordinatorRegistryCenter.getChildrenKeys(path)) {
+			String zkPath = path + "/" + each;
+			String zkValue = coordinatorRegistryCenter.get(zkPath);
+			if (null == zkValue) {
+				zkValue = "";
+			}
+			TreeCache treeCache = (TreeCache) coordinatorRegistryCenter.getRawCache("/" + jobName);
+			ChildData treeCacheData = treeCache.getCurrentData(zkPath);
+			String treeCachePath = null == treeCacheData ? "" : treeCacheData.getPath();
+			String treeCacheValue = null == treeCacheData ? "" : new String(treeCacheData.getData());
+			if (zkValue.equals(treeCacheValue) && zkPath.equals(treeCachePath)) {
+				result.add(Joiner.on(" | ").join(zkPath, zkValue));
+			} else {
+				result.add(Joiner.on(" | ").join(zkPath, zkValue, treeCachePath, treeCacheValue));
+			}
+			dumpDirectly(zkPath, result);
+		}
+	}
+
+	private void outputMessage(final BufferedWriter outputWriter, final String msg) throws IOException {
+		outputWriter.append(msg);
+		outputWriter.flush();
+	}
+
+	/**
+	 * 关闭作业监听服务.
+	 */
+	public void close() {
+		closed = true;
+		if (null != serverSocket && !serverSocket.isClosed()) {
+			try {
+				serverSocket.close();
+			} catch (final IOException ex) {
+				log.warn(ex.getMessage());
+			}
+		}
+	}
 }

@@ -41,7 +41,7 @@ public class RegistryCenterServiceImpl implements RegistryCenterService {
     @Resource
     private RegistryCenterConfigurationsXmlRepository registryCenterConfigurationsXmlRepository;
     
-    private ConcurrentHashMap<String, RegistryCenterClient> clientMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, RegistryCenterClient> clientMap = new ConcurrentHashMap<String, RegistryCenterClient>();
     
     @Override
     public Collection<RegistryCenterConfiguration> loadAll() {

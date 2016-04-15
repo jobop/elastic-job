@@ -40,7 +40,7 @@ import lombok.NoArgsConstructor;
 public final class SensitiveInfoUtils {
     
     public static List<String> filterSensitiveIps(final List<String> result) {
-        final Map<String, String> fakeIpMap = new HashMap<>();
+        final Map<String, String> fakeIpMap = new HashMap<String, String>();
         final String fakeIpSample = "ip";
         final AtomicInteger step = new AtomicInteger();
         Function<String, String> func = new Function<String, String>() {

@@ -32,9 +32,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ProcessCountStatistics {
     
-    private static ConcurrentMap<String, AtomicInteger> processSuccessCount = new ConcurrentHashMap<>();
+    private static ConcurrentMap<String, AtomicInteger> processSuccessCount = new ConcurrentHashMap<String, AtomicInteger>();
     
-    private static ConcurrentMap<String, AtomicInteger> processFailureCount = new ConcurrentHashMap<>();
+    private static ConcurrentMap<String, AtomicInteger> processFailureCount = new ConcurrentHashMap<String, AtomicInteger>();
     
     /**
      * 增加本作业服务器处理数据正确的数量.

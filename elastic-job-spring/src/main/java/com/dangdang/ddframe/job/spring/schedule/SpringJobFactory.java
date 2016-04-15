@@ -17,14 +17,14 @@
 
 package com.dangdang.ddframe.job.spring.schedule;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.simpl.PropertySettingJobFactory;
 import org.quartz.spi.TriggerFiredBundle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -38,9 +38,8 @@ import com.google.common.base.Preconditions;
  * 
  * @author zhangliang
  */
-@Slf4j
 public final class SpringJobFactory extends PropertySettingJobFactory {
-    
+    private Logger log=LoggerFactory.getLogger(SpringJobFactory.class);
     private static ApplicationContext applicationContext;
     
     public static void setApplicationContext(final ApplicationContext context) throws BeansException {

@@ -23,8 +23,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 final class SpringZookeeperConfigurationDto {
-    
-    public SpringZookeeperConfigurationDto(String serverLists, String namespace, String baseSleepTimeMilliseconds, String maxSleepTimeMilliseconds, String maxRetries,
+	public SpringZookeeperConfigurationDto(String serverLists, String namespace, String baseSleepTimeMilliseconds, String maxSleepTimeMilliseconds, String maxRetries) {
+		super();
+		this.serverLists = serverLists;
+		this.namespace = namespace;
+		this.baseSleepTimeMilliseconds = baseSleepTimeMilliseconds;
+		this.maxSleepTimeMilliseconds = maxSleepTimeMilliseconds;
+		this.maxRetries = maxRetries;
+	}
+
+	public SpringZookeeperConfigurationDto(String serverLists, String namespace, String baseSleepTimeMilliseconds, String maxSleepTimeMilliseconds, String maxRetries,
 			String sessionTimeoutMilliseconds, String connectionTimeoutMilliseconds, String digest, String nestedPort, String nestedDataDir, String localPropertiesPath, String overwrite) {
 		super();
 		this.serverLists = serverLists;
@@ -42,28 +50,28 @@ final class SpringZookeeperConfigurationDto {
 	}
 
 	private final String serverLists;
-    
-    private final String namespace;
-    
-    private final String baseSleepTimeMilliseconds;
-    
-    private final String maxSleepTimeMilliseconds;
-    
-    private final String maxRetries;
-    
-    private String sessionTimeoutMilliseconds;
-    
-    private String connectionTimeoutMilliseconds;
-    
-    private String digest;
-    
-    private String nestedPort;
-    
-    private String nestedDataDir;
-    
-    private String localPropertiesPath;
-    
-    private String overwrite;
+
+	private final String namespace;
+
+	private final String baseSleepTimeMilliseconds;
+
+	private final String maxSleepTimeMilliseconds;
+
+	private final String maxRetries;
+
+	private String sessionTimeoutMilliseconds;
+
+	private String connectionTimeoutMilliseconds;
+
+	private String digest;
+
+	private String nestedPort;
+
+	private String nestedDataDir;
+
+	private String localPropertiesPath;
+
+	private String overwrite;
 
 	public String getSessionTimeoutMilliseconds() {
 		return sessionTimeoutMilliseconds;
@@ -140,6 +148,5 @@ final class SpringZookeeperConfigurationDto {
 	public String getMaxRetries() {
 		return maxRetries;
 	}
-    
-    
+
 }
