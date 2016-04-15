@@ -26,10 +26,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.Getter;
 
-@Getter
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public final class RegistryCenterConfigurations {
     
     private Set<RegistryCenterConfiguration> registryCenterConfiguration = new LinkedHashSet<>();
+
+	public Set<RegistryCenterConfiguration> getRegistryCenterConfiguration() {
+		return registryCenterConfiguration;
+	}
+
+	public void setRegistryCenterConfiguration(Set<RegistryCenterConfiguration> registryCenterConfiguration) {
+		this.registryCenterConfiguration = registryCenterConfiguration;
+	}
+    
+    
 }

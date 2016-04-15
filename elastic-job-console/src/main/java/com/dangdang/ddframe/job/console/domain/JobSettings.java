@@ -22,8 +22,6 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public final class JobSettings implements Serializable {
     
     private static final long serialVersionUID = -6532210090618686688L;
@@ -59,4 +57,134 @@ public final class JobSettings implements Serializable {
     private String jobShardingStrategyClass;
     
     private String description;
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+
+	public String getJobClass() {
+		return jobClass;
+	}
+
+	public void setJobClass(String jobClass) {
+		this.jobClass = jobClass;
+	}
+
+	public int getShardingTotalCount() {
+		return shardingTotalCount;
+	}
+
+	public void setShardingTotalCount(int shardingTotalCount) {
+		this.shardingTotalCount = shardingTotalCount;
+	}
+
+	public String getCron() {
+		return cron;
+	}
+
+	public void setCron(String cron) {
+		this.cron = cron;
+	}
+
+	public String getShardingItemParameters() {
+		return shardingItemParameters;
+	}
+
+	public void setShardingItemParameters(String shardingItemParameters) {
+		this.shardingItemParameters = shardingItemParameters;
+	}
+
+	public String getJobParameter() {
+		return jobParameter;
+	}
+
+	public void setJobParameter(String jobParameter) {
+		this.jobParameter = jobParameter;
+	}
+
+	public boolean isMonitorExecution() {
+		return monitorExecution;
+	}
+
+	public void setMonitorExecution(boolean monitorExecution) {
+		this.monitorExecution = monitorExecution;
+	}
+
+	public int getProcessCountIntervalSeconds() {
+		return processCountIntervalSeconds;
+	}
+
+	public void setProcessCountIntervalSeconds(int processCountIntervalSeconds) {
+		this.processCountIntervalSeconds = processCountIntervalSeconds;
+	}
+
+	public int getConcurrentDataProcessThreadCount() {
+		return concurrentDataProcessThreadCount;
+	}
+
+	public void setConcurrentDataProcessThreadCount(int concurrentDataProcessThreadCount) {
+		this.concurrentDataProcessThreadCount = concurrentDataProcessThreadCount;
+	}
+
+	public int getFetchDataCount() {
+		return fetchDataCount;
+	}
+
+	public void setFetchDataCount(int fetchDataCount) {
+		this.fetchDataCount = fetchDataCount;
+	}
+
+	public int getMaxTimeDiffSeconds() {
+		return maxTimeDiffSeconds;
+	}
+
+	public void setMaxTimeDiffSeconds(int maxTimeDiffSeconds) {
+		this.maxTimeDiffSeconds = maxTimeDiffSeconds;
+	}
+
+	public int getMonitorPort() {
+		return monitorPort;
+	}
+
+	public void setMonitorPort(int monitorPort) {
+		this.monitorPort = monitorPort;
+	}
+
+	public boolean isFailover() {
+		return failover;
+	}
+
+	public void setFailover(boolean failover) {
+		this.failover = failover;
+	}
+
+	public boolean isMisfire() {
+		return misfire;
+	}
+
+	public void setMisfire(boolean misfire) {
+		this.misfire = misfire;
+	}
+
+	public String getJobShardingStrategyClass() {
+		return jobShardingStrategyClass;
+	}
+
+	public void setJobShardingStrategyClass(String jobShardingStrategyClass) {
+		this.jobShardingStrategyClass = jobShardingStrategyClass;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+    
+    
 }

@@ -20,6 +20,8 @@ package com.dangdang.ddframe.job.internal.election;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCacheEvent;
 import org.apache.curator.framework.recipes.cache.TreeCacheEvent.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.internal.listener.AbstractJobListener;
@@ -27,16 +29,13 @@ import com.dangdang.ddframe.job.internal.listener.AbstractListenerManager;
 import com.dangdang.ddframe.job.internal.sharding.ShardingService;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 主节点选举监听管理器.
  * 
  * @author zhangliang
  */
-@Slf4j
 public class ElectionListenerManager extends AbstractListenerManager {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     private final LeaderElectionService leaderElectionService;
     
     private final ShardingService shardingService;

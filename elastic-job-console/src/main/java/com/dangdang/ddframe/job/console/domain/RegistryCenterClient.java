@@ -25,11 +25,8 @@ import lombok.Setter;
 
 import org.apache.curator.framework.CuratorFramework;
 
-@Getter
-@Setter
-@NoArgsConstructor
 public final class RegistryCenterClient implements Serializable {
-    
+    public RegistryCenterClient(){}
     private static final long serialVersionUID = -946258964014121184L;
     
     private String name;
@@ -41,4 +38,30 @@ public final class RegistryCenterClient implements Serializable {
     public RegistryCenterClient(final String name) {
         this.name = name;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public CuratorFramework getCuratorClient() {
+		return curatorClient;
+	}
+
+	public void setCuratorClient(CuratorFramework curatorClient) {
+		this.curatorClient = curatorClient;
+	}
+
+	public boolean isConnected() {
+		return connected;
+	}
+
+	public void setConnected(boolean connected) {
+		this.connected = connected;
+	}
+    
+    
 }

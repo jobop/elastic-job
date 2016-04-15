@@ -26,12 +26,38 @@ import lombok.Setter;
  * 
  * @author zhangliang
  */
-@Getter
-@Setter
-@RequiredArgsConstructor
 public class JobConfiguration {
-    
-    /**
+	public JobConfiguration(String jobName, Class<? extends ElasticJob> jobClass, int shardingTotalCount, String cron){
+		this.jobName = jobName;
+		this.jobClass = jobClass;
+		this.shardingTotalCount = shardingTotalCount;
+		this.cron = cron;
+	}
+    public JobConfiguration(String jobName, Class<? extends ElasticJob> jobClass, int shardingTotalCount, String cron, String shardingItemParameters, String jobParameter, boolean monitorExecution,
+			int processCountIntervalSeconds, int concurrentDataProcessThreadCount, int fetchDataCount, int maxTimeDiffSeconds, boolean failover, boolean misfire, int monitorPort,
+			String jobShardingStrategyClass, String description, boolean disabled, boolean overwrite) {
+		super();
+		this.jobName = jobName;
+		this.jobClass = jobClass;
+		this.shardingTotalCount = shardingTotalCount;
+		this.cron = cron;
+		this.shardingItemParameters = shardingItemParameters;
+		this.jobParameter = jobParameter;
+		this.monitorExecution = monitorExecution;
+		this.processCountIntervalSeconds = processCountIntervalSeconds;
+		this.concurrentDataProcessThreadCount = concurrentDataProcessThreadCount;
+		this.fetchDataCount = fetchDataCount;
+		this.maxTimeDiffSeconds = maxTimeDiffSeconds;
+		this.failover = failover;
+		this.misfire = misfire;
+		this.monitorPort = monitorPort;
+		this.jobShardingStrategyClass = jobShardingStrategyClass;
+		this.description = description;
+		this.disabled = disabled;
+		this.overwrite = overwrite;
+	}
+
+	/**
      * 作业名称.
      */
     private final String jobName;
@@ -164,4 +190,134 @@ public class JobConfiguration {
      * 如果可覆盖, 每次启动作业都以本地配置为准.
      */
     private boolean overwrite;
+
+	public String getShardingItemParameters() {
+		return shardingItemParameters;
+	}
+
+	public void setShardingItemParameters(String shardingItemParameters) {
+		this.shardingItemParameters = shardingItemParameters;
+	}
+
+	public String getJobParameter() {
+		return jobParameter;
+	}
+
+	public void setJobParameter(String jobParameter) {
+		this.jobParameter = jobParameter;
+	}
+
+	public boolean isMonitorExecution() {
+		return monitorExecution;
+	}
+
+	public void setMonitorExecution(boolean monitorExecution) {
+		this.monitorExecution = monitorExecution;
+	}
+
+	public int getProcessCountIntervalSeconds() {
+		return processCountIntervalSeconds;
+	}
+
+	public void setProcessCountIntervalSeconds(int processCountIntervalSeconds) {
+		this.processCountIntervalSeconds = processCountIntervalSeconds;
+	}
+
+	public int getConcurrentDataProcessThreadCount() {
+		return concurrentDataProcessThreadCount;
+	}
+
+	public void setConcurrentDataProcessThreadCount(int concurrentDataProcessThreadCount) {
+		this.concurrentDataProcessThreadCount = concurrentDataProcessThreadCount;
+	}
+
+	public int getFetchDataCount() {
+		return fetchDataCount;
+	}
+
+	public void setFetchDataCount(int fetchDataCount) {
+		this.fetchDataCount = fetchDataCount;
+	}
+
+	public int getMaxTimeDiffSeconds() {
+		return maxTimeDiffSeconds;
+	}
+
+	public void setMaxTimeDiffSeconds(int maxTimeDiffSeconds) {
+		this.maxTimeDiffSeconds = maxTimeDiffSeconds;
+	}
+
+	public boolean isFailover() {
+		return failover;
+	}
+
+	public void setFailover(boolean failover) {
+		this.failover = failover;
+	}
+
+	public boolean isMisfire() {
+		return misfire;
+	}
+
+	public void setMisfire(boolean misfire) {
+		this.misfire = misfire;
+	}
+
+	public int getMonitorPort() {
+		return monitorPort;
+	}
+
+	public void setMonitorPort(int monitorPort) {
+		this.monitorPort = monitorPort;
+	}
+
+	public String getJobShardingStrategyClass() {
+		return jobShardingStrategyClass;
+	}
+
+	public void setJobShardingStrategyClass(String jobShardingStrategyClass) {
+		this.jobShardingStrategyClass = jobShardingStrategyClass;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+
+	public boolean isOverwrite() {
+		return overwrite;
+	}
+
+	public void setOverwrite(boolean overwrite) {
+		this.overwrite = overwrite;
+	}
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public Class<? extends ElasticJob> getJobClass() {
+		return jobClass;
+	}
+
+	public int getShardingTotalCount() {
+		return shardingTotalCount;
+	}
+
+	public String getCron() {
+		return cron;
+	}
+    
+    
 }

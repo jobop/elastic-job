@@ -32,7 +32,6 @@ import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.when;
 
-@Getter(AccessLevel.PROTECTED)
 public abstract class AbstractDataFlowElasticJobTest {
     
     @Mock
@@ -61,4 +60,38 @@ public abstract class AbstractDataFlowElasticJobTest {
     }
     
     protected abstract AbstractDataFlowElasticJob createDataFlowElasticJob(final JobCaller jobCaller);
+
+	public JobCaller getJobCaller() {
+		return jobCaller;
+	}
+
+	public void setJobCaller(JobCaller jobCaller) {
+		this.jobCaller = jobCaller;
+	}
+
+	public JobFacade getJobFacade() {
+		return jobFacade;
+	}
+
+	public void setJobFacade(JobFacade jobFacade) {
+		this.jobFacade = jobFacade;
+	}
+
+	public JobExecutionMultipleShardingContext getShardingContext() {
+		return shardingContext;
+	}
+
+	public void setShardingContext(JobExecutionMultipleShardingContext shardingContext) {
+		this.shardingContext = shardingContext;
+	}
+
+	public AbstractDataFlowElasticJob getDataFlowElasticJob() {
+		return dataFlowElasticJob;
+	}
+
+	public void setDataFlowElasticJob(AbstractDataFlowElasticJob dataFlowElasticJob) {
+		this.dataFlowElasticJob = dataFlowElasticJob;
+	}
+    
+    
 }

@@ -29,7 +29,6 @@ import java.util.Arrays;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@Getter(AccessLevel.PROTECTED)
 public abstract class AbstractUnstreamingSequenceDataFlowElasticJobTest extends AbstractSequenceDataFlowElasticJobTest {
     
     @Test

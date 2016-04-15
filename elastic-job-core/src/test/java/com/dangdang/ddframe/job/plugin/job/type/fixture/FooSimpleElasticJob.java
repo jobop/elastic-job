@@ -24,10 +24,14 @@ import com.dangdang.ddframe.job.plugin.job.type.simple.AbstractSimpleElasticJob;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class FooSimpleElasticJob extends AbstractSimpleElasticJob {
     
-    private final JobCaller jobCaller;
+    public FooSimpleElasticJob(JobCaller jobCaller) {
+		super();
+		this.jobCaller = jobCaller;
+	}
+
+	private final JobCaller jobCaller;
     
     @Override
     public void process(final JobExecutionMultipleShardingContext shardingContext) {

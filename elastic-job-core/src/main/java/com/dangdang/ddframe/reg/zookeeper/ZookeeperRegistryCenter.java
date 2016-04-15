@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
@@ -39,6 +41,8 @@ import org.apache.curator.utils.CloseableUtils;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.data.ACL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
 import com.dangdang.ddframe.reg.exception.LocalPropertiesFileNotFoundException;
@@ -46,19 +50,15 @@ import com.dangdang.ddframe.reg.exception.RegExceptionHandler;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 基于Zookeeper的注册中心.
  * 
  * @author zhangliang
  */
-@Slf4j
 public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
+	
+	private Logger log =LoggerFactory.getLogger(ZookeeperRegistryCenter.class);
     
-    @Getter(AccessLevel.PROTECTED)
     private ZookeeperConfiguration zkConfig;
     
     private final Map<String, TreeCache> caches = new HashMap<>();
@@ -328,4 +328,9 @@ public class ZookeeperRegistryCenter implements CoordinatorRegistryCenter {
     public Object getRawCache(final String cachePath) {
         return caches.get(cachePath + "/");
     }
+
+	public ZookeeperConfiguration getZkConfig() {
+		return zkConfig;
+	}
+    
 }

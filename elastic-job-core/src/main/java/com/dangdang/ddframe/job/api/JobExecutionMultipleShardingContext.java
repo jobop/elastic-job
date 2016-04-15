@@ -23,28 +23,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Setter;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dangdang.ddframe.job.exception.JobException;
 import com.dangdang.ddframe.job.internal.job.AbstractJobExecutionShardingContext;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 作业运行时多片分片上下文.
  * 
  * @author zhangliang
  */
-@Getter
 public final class JobExecutionMultipleShardingContext extends AbstractJobExecutionShardingContext {
-    
     private static int initCollectionSize = 64;
     
     /**
      * 运行在本作业服务器的分片序列号集合.
      */
-    @Setter
     private List<Integer> shardingItems = new ArrayList<>(initCollectionSize);
     
     /**
@@ -55,7 +53,6 @@ public final class JobExecutionMultipleShardingContext extends AbstractJobExecut
     /**
      * 数据分片项和数据处理位置Map.
      */
-    @Setter
     private Map<Integer, String> offsets = new HashMap<>();
     
     /**
@@ -84,4 +81,39 @@ public final class JobExecutionMultipleShardingContext extends AbstractJobExecut
                 getJobName(), getShardingTotalCount(), shardingItems, shardingItemParameters, getJobParameter()
             );
     }
+
+	public static int getInitCollectionSize() {
+		return initCollectionSize;
+	}
+
+	public static void setInitCollectionSize(int initCollectionSize) {
+		JobExecutionMultipleShardingContext.initCollectionSize = initCollectionSize;
+	}
+
+	public List<Integer> getShardingItems() {
+		return shardingItems;
+	}
+
+	public void setShardingItems(List<Integer> shardingItems) {
+		this.shardingItems = shardingItems;
+	}
+
+	public Map<Integer, String> getShardingItemParameters() {
+		return shardingItemParameters;
+	}
+
+	public void setShardingItemParameters(Map<Integer, String> shardingItemParameters) {
+		this.shardingItemParameters = shardingItemParameters;
+	}
+
+	public Map<Integer, String> getOffsets() {
+		return offsets;
+	}
+
+	public void setOffsets(Map<Integer, String> offsets) {
+		this.offsets = offsets;
+	}
+	
+	
+    
 }

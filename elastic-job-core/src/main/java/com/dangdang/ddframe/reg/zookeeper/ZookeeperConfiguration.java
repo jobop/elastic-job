@@ -29,11 +29,11 @@ import com.google.common.base.Strings;
  * 
  * @author zhangliang
  */
-@Getter
-@Setter
-@NoArgsConstructor
+
 public class ZookeeperConfiguration extends AbstractRegistryCenterConfiguration {
-    
+    public ZookeeperConfiguration(){
+    	
+    }
     /**
      * 连接Zookeeper服务器的列表.
      * 包括IP地址和端口号.
@@ -119,4 +119,86 @@ public class ZookeeperConfiguration extends AbstractRegistryCenterConfiguration 
     public boolean isUseNestedZookeeper() {
         return -1 != nestedPort && !Strings.isNullOrEmpty(nestedDataDir);
     }
+
+	public String getServerLists() {
+		return serverLists;
+	}
+
+	public void setServerLists(String serverLists) {
+		this.serverLists = serverLists;
+	}
+
+	public String getNamespace() {
+		return namespace;
+	}
+
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public int getBaseSleepTimeMilliseconds() {
+		return baseSleepTimeMilliseconds;
+	}
+
+	public void setBaseSleepTimeMilliseconds(int baseSleepTimeMilliseconds) {
+		this.baseSleepTimeMilliseconds = baseSleepTimeMilliseconds;
+	}
+
+	public int getMaxSleepTimeMilliseconds() {
+		return maxSleepTimeMilliseconds;
+	}
+
+	public void setMaxSleepTimeMilliseconds(int maxSleepTimeMilliseconds) {
+		this.maxSleepTimeMilliseconds = maxSleepTimeMilliseconds;
+	}
+
+	public int getMaxRetries() {
+		return maxRetries;
+	}
+
+	public void setMaxRetries(int maxRetries) {
+		this.maxRetries = maxRetries;
+	}
+
+	public int getSessionTimeoutMilliseconds() {
+		return sessionTimeoutMilliseconds;
+	}
+
+	public void setSessionTimeoutMilliseconds(int sessionTimeoutMilliseconds) {
+		this.sessionTimeoutMilliseconds = sessionTimeoutMilliseconds;
+	}
+
+	public int getConnectionTimeoutMilliseconds() {
+		return connectionTimeoutMilliseconds;
+	}
+
+	public void setConnectionTimeoutMilliseconds(int connectionTimeoutMilliseconds) {
+		this.connectionTimeoutMilliseconds = connectionTimeoutMilliseconds;
+	}
+
+	public String getDigest() {
+		return digest;
+	}
+
+	public void setDigest(String digest) {
+		this.digest = digest;
+	}
+
+	public int getNestedPort() {
+		return nestedPort;
+	}
+
+	public void setNestedPort(int nestedPort) {
+		this.nestedPort = nestedPort;
+	}
+
+	public String getNestedDataDir() {
+		return nestedDataDir;
+	}
+
+	public void setNestedDataDir(String nestedDataDir) {
+		this.nestedDataDir = nestedDataDir;
+	}
+    
+    
 }

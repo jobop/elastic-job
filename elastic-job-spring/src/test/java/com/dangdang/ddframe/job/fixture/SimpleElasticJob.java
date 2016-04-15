@@ -25,13 +25,10 @@ import com.dangdang.ddframe.job.plugin.job.type.simple.AbstractSimpleElasticJob;
 
 public final class SimpleElasticJob extends AbstractSimpleElasticJob {
     
-    @Getter
     private static volatile boolean completed;
     
-    @Setter
     private static String springValue;
     
-    @Getter
     private static String jobValue;
     
     @Override
@@ -43,4 +40,30 @@ public final class SimpleElasticJob extends AbstractSimpleElasticJob {
     public static void reset() {
         completed = false;
     }
+
+	public static boolean isCompleted() {
+		return completed;
+	}
+
+	public static void setCompleted(boolean completed) {
+		SimpleElasticJob.completed = completed;
+	}
+
+	public static String getSpringValue() {
+		return springValue;
+	}
+
+	public static void setSpringValue(String springValue) {
+		SimpleElasticJob.springValue = springValue;
+	}
+
+	public static String getJobValue() {
+		return jobValue;
+	}
+
+	public static void setJobValue(String jobValue) {
+		SimpleElasticJob.jobValue = jobValue;
+	}
+    
+    
 }

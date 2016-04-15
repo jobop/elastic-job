@@ -44,7 +44,6 @@ public class JobNodeStorage {
     
     private final CoordinatorRegistryCenter coordinatorRegistryCenter;
     
-    @Getter
     private final JobConfiguration jobConfiguration;
     
     private final JobNodePath jobNodePath;
@@ -229,4 +228,9 @@ public class JobNodeStorage {
     public long getRegistryCenterTime() {
         return coordinatorRegistryCenter.getRegistryCenterTime(jobNodePath.getFullPath("systemTime/current"));
     }
+
+	public JobConfiguration getJobConfiguration() {
+		return jobConfiguration;
+	}
+    
 }

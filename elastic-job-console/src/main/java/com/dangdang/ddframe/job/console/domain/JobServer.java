@@ -24,8 +24,6 @@ import lombok.Setter;
 
 import com.google.common.base.Strings;
 
-@Getter
-@Setter
 public final class JobServer implements Serializable {
     
     private static final long serialVersionUID = 4241736510750597679L;
@@ -72,4 +70,78 @@ public final class JobServer implements Serializable {
             return ServerStatus.valueOf(status);
         }
     }
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getHostName() {
+		return hostName;
+	}
+
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+
+	public ServerStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ServerStatus status) {
+		this.status = status;
+	}
+
+	public int getProcessSuccessCount() {
+		return processSuccessCount;
+	}
+
+	public void setProcessSuccessCount(int processSuccessCount) {
+		this.processSuccessCount = processSuccessCount;
+	}
+
+	public int getProcessFailureCount() {
+		return processFailureCount;
+	}
+
+	public void setProcessFailureCount(int processFailureCount) {
+		this.processFailureCount = processFailureCount;
+	}
+
+	public String getSharding() {
+		return sharding;
+	}
+
+	public void setSharding(String sharding) {
+		this.sharding = sharding;
+	}
+
+	public boolean isLeader() {
+		return leader;
+	}
+
+	public void setLeader(boolean leader) {
+		this.leader = leader;
+	}
+
+	public boolean isLeaderStopped() {
+		return leaderStopped;
+	}
+
+	public void setLeaderStopped(boolean leaderStopped) {
+		this.leaderStopped = leaderStopped;
+	}
+    
+    
 }

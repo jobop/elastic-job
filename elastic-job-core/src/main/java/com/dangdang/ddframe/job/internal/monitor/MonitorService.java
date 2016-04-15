@@ -29,6 +29,8 @@ import java.util.List;
 
 import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.TreeCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.internal.config.ConfigurationService;
@@ -36,16 +38,13 @@ import com.dangdang.ddframe.job.internal.util.SensitiveInfoUtils;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
 import com.google.common.base.Joiner;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 作业监控服务.
  * 
  * @author caohao
  */
-@Slf4j
 public class MonitorService {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     public static final String DUMP_COMMAND = "dump";
     
     private final String jobName;

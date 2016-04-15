@@ -29,15 +29,55 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@EqualsAndHashCode(exclude = {"zkAddressList", "namespace", "digest", "activated"})
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@NoArgsConstructor
 public class RegistryCenterConfiguration implements Serializable {
+    public RegistryCenterConfiguration(){}
     
-    private static final long serialVersionUID = -5996257770767863699L;
+    
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (activated ? 1231 : 1237);
+		result = prime * result + ((digest == null) ? 0 : digest.hashCode());
+		result = prime * result + ((namespace == null) ? 0 : namespace.hashCode());
+		result = prime * result + ((zkAddressList == null) ? 0 : zkAddressList.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegistryCenterConfiguration other = (RegistryCenterConfiguration) obj;
+		if (activated != other.activated)
+			return false;
+		if (digest == null) {
+			if (other.digest != null)
+				return false;
+		} else if (!digest.equals(other.digest))
+			return false;
+		if (namespace == null) {
+			if (other.namespace != null)
+				return false;
+		} else if (!namespace.equals(other.namespace))
+			return false;
+		if (zkAddressList == null) {
+			if (other.zkAddressList != null)
+				return false;
+		} else if (!zkAddressList.equals(other.zkAddressList))
+			return false;
+		return true;
+	}
+
+
+	private static final long serialVersionUID = -5996257770767863699L;
     
     @XmlAttribute(required = true)
     private String name;
@@ -57,4 +97,46 @@ public class RegistryCenterConfiguration implements Serializable {
     public RegistryCenterConfiguration(final String name) {
         this.name = name;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getZkAddressList() {
+		return zkAddressList;
+	}
+
+	public void setZkAddressList(String zkAddressList) {
+		this.zkAddressList = zkAddressList;
+	}
+
+	public String getNamespace() {
+		return namespace;
+	}
+
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public String getDigest() {
+		return digest;
+	}
+
+	public void setDigest(String digest) {
+		this.digest = digest;
+	}
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+    
+    
 }

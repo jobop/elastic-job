@@ -17,9 +17,9 @@
 
 package com.dangdang.ddframe.job.plugin.job.type.simple;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
 import com.dangdang.ddframe.job.internal.job.AbstractElasticJob;
@@ -34,9 +34,8 @@ import com.dangdang.ddframe.job.internal.job.AbstractElasticJob;
  * @author zhangliang
  * @author caohao
  */
-@Slf4j
 public abstract class AbstractSimpleElasticJob extends AbstractElasticJob {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     @Override
     protected final void executeJob(final JobExecutionMultipleShardingContext shardingContext) {
         process(shardingContext);

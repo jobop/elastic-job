@@ -10,11 +10,28 @@ import lombok.RequiredArgsConstructor;
  * 
  * @author zhangliang
  */
-@Getter
-@RequiredArgsConstructor
 public final class JobShardingStrategyOption {
     
-    /**
+    public JobShardingStrategyOption(String jobName, int shardingTotalCount, Map<Integer, String> shardingItemParameters) {
+		super();
+		this.jobName = jobName;
+		this.shardingTotalCount = shardingTotalCount;
+		this.shardingItemParameters = shardingItemParameters;
+	}
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public int getShardingTotalCount() {
+		return shardingTotalCount;
+	}
+
+	public Map<Integer, String> getShardingItemParameters() {
+		return shardingItemParameters;
+	}
+
+	/**
      * 作业名称.
      */
     private final String jobName;

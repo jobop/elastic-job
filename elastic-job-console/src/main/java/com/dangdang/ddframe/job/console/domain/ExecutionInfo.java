@@ -23,8 +23,6 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public final class ExecutionInfo implements Serializable, Comparable<ExecutionInfo> {
     
     private static final long serialVersionUID = 8587397581949456718L;
@@ -61,4 +59,54 @@ public final class ExecutionInfo implements Serializable, Comparable<ExecutionIn
             return ExecutionStatus.PENDING;
         }
     }
+
+	public int getItem() {
+		return item;
+	}
+
+	public void setItem(int item) {
+		this.item = item;
+	}
+
+	public ExecutionStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ExecutionStatus status) {
+		this.status = status;
+	}
+
+	public String getFailoverIp() {
+		return failoverIp;
+	}
+
+	public void setFailoverIp(String failoverIp) {
+		this.failoverIp = failoverIp;
+	}
+
+	public Date getLastBeginTime() {
+		return lastBeginTime;
+	}
+
+	public void setLastBeginTime(Date lastBeginTime) {
+		this.lastBeginTime = lastBeginTime;
+	}
+
+	public Date getNextFireTime() {
+		return nextFireTime;
+	}
+
+	public void setNextFireTime(Date nextFireTime) {
+		this.nextFireTime = nextFireTime;
+	}
+
+	public Date getLastCompleteTime() {
+		return lastCompleteTime;
+	}
+
+	public void setLastCompleteTime(Date lastCompleteTime) {
+		this.lastCompleteTime = lastCompleteTime;
+	}
+    
+    
 }

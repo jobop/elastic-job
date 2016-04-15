@@ -24,10 +24,14 @@ import com.dangdang.ddframe.job.plugin.job.type.dataflow.AbstractBatchSequenceDa
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public final class FooStreamingBatchSequenceDataFlowElasticJob extends AbstractBatchSequenceDataFlowElasticJob<Object> {
     
-    private final JobCaller jobCaller;
+    public FooStreamingBatchSequenceDataFlowElasticJob(JobCaller jobCaller) {
+		super();
+		this.jobCaller = jobCaller;
+	}
+
+	private final JobCaller jobCaller;
     
     @Override
     public List<Object> fetchData(final JobExecutionSingleShardingContext shardingContext) {

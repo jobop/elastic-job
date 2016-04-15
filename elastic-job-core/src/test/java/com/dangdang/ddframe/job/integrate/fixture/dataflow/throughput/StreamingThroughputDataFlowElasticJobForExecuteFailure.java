@@ -26,7 +26,6 @@ import java.util.List;
 
 public class StreamingThroughputDataFlowElasticJobForExecuteFailure extends AbstractIndividualThroughputDataFlowElasticJob<String> {
     
-    @Getter
     private static volatile boolean completed;
     
     @Override
@@ -51,4 +50,14 @@ public class StreamingThroughputDataFlowElasticJobForExecuteFailure extends Abst
     public static void reset() {
         completed = false;
     }
+
+	public static boolean isCompleted() {
+		return completed;
+	}
+
+	public static void setCompleted(boolean completed) {
+		StreamingThroughputDataFlowElasticJobForExecuteFailure.completed = completed;
+	}
+    
+    
 }
