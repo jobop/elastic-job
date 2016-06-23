@@ -2,11 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dangdang</groupId>
     <artifactId>elastic-job</artifactId>
-<<<<<<< HEAD
-    <version>1.0.7-SNAPSHOT</version>
-=======
-    <version>1.0.7.cmffix</version>
->>>>>>> branch
+    <version>1.0.8.cmffix-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Elastic-Job - distributed scheduled job solution</description>
