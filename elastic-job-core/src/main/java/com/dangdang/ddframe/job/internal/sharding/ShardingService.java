@@ -17,6 +17,17 @@
 
 package com.dangdang.ddframe.job.internal.sharding;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import lombok.RequiredArgsConstructor;
+
+import org.apache.curator.framework.api.transaction.CuratorTransactionFinal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.internal.config.ConfigurationService;
 import com.dangdang.ddframe.job.internal.election.LeaderElectionService;
@@ -32,23 +43,14 @@ import com.dangdang.ddframe.job.internal.storage.TransactionExecutionCallback;
 import com.dangdang.ddframe.job.internal.util.BlockUtils;
 import com.dangdang.ddframe.job.internal.util.ItemUtils;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.curator.framework.api.transaction.CuratorTransactionFinal;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * 作业分片服务.
  * 
  * @author zhangliang
  */
-@Slf4j
 public class ShardingService {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     private final String jobName;
     
     private final JobNodeStorage jobNodeStorage;
@@ -146,10 +148,14 @@ public class ShardingService {
         return ItemUtils.toItemList(jobNodeStorage.getJobNodeDataDirectly(ShardingNode.getShardingNode(ip)));
     }
     
-    @RequiredArgsConstructor
     class PersistShardingInfoTransactionExecutionCallback implements TransactionExecutionCallback {
         
-        private final Map<String, List<Integer>> shardingItems;
+        public PersistShardingInfoTransactionExecutionCallback(Map<String, List<Integer>> shardingItems) {
+			super();
+			this.shardingItems = shardingItems;
+		}
+
+		private final Map<String, List<Integer>> shardingItems;
         
         @Override
         public void execute(final CuratorTransactionFinal curatorTransactionFinal) throws Exception {

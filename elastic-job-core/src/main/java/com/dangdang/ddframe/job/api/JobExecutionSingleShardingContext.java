@@ -27,8 +27,6 @@ import lombok.Setter;
  * 
  * @author zhangliang
  */
-@Getter
-@Setter
 public final class JobExecutionSingleShardingContext extends AbstractJobExecutionShardingContext {
     
     /**
@@ -45,4 +43,31 @@ public final class JobExecutionSingleShardingContext extends AbstractJobExecutio
      * 数据处理位置.
      */
     private String offset;
+
+	public int getShardingItem() {
+		return shardingItem;
+	}
+
+	public void setShardingItem(int shardingItem) {
+		this.shardingItem = shardingItem;
+	}
+
+	public String getShardingItemParameter() {
+		return shardingItemParameter;
+	}
+
+	public void setShardingItemParameter(String shardingItemParameter) {
+		this.shardingItemParameter = shardingItemParameter;
+	}
+
+	public String getOffset() {
+		return offset;
+	}
+
+	public void setOffset(String offset) {
+		this.offset = offset;
+	}
+    
+    
+    
 }

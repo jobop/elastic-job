@@ -31,7 +31,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@Getter(AccessLevel.PROTECTED)
 public abstract class AbstractSequenceDataFlowElasticJobTest extends AbstractDataFlowElasticJobTest {
     
     @Test

@@ -49,13 +49,10 @@ public abstract class AbstractBaseStdJobTest extends AbstractNestedZookeeperBase
     
     private static ZookeeperConfiguration zkConfig = new ZookeeperConfiguration(ZK_CONNECTION_STRING, "zkRegTestCenter", 1000, 3000, 3);
     
-    @Getter(value = AccessLevel.PROTECTED)
     private static CoordinatorRegistryCenter regCenter = new ZookeeperRegistryCenter(zkConfig);
     
-    @Getter(AccessLevel.PROTECTED)
     private final LocalHostService localHostService = new LocalHostService();
     
-    @Getter(AccessLevel.PROTECTED)
     private final JobConfiguration jobConfig;
     
     private final JobScheduler jobScheduler;
@@ -66,7 +63,6 @@ public abstract class AbstractBaseStdJobTest extends AbstractNestedZookeeperBase
     
     private final LeaderElectionService leaderElectionService;
     
-    @Getter(AccessLevel.PROTECTED)
     private final String jobName = System.nanoTime() + "_testJob";
     
     protected AbstractBaseStdJobTest(final Class<? extends ElasticJob> elasticJobClass, final boolean disabled) {
@@ -157,4 +153,50 @@ public abstract class AbstractBaseStdJobTest extends AbstractNestedZookeeperBase
         assertThat(regCenter.get("/" + jobName + "/listener/once"), is("test"));
         assertThat(regCenter.get("/" + jobName + "/listener/every"), is("test"));
     }
+
+	public static ZookeeperConfiguration getZkConfig() {
+		return zkConfig;
+	}
+
+	public static void setZkConfig(ZookeeperConfiguration zkConfig) {
+		AbstractBaseStdJobTest.zkConfig = zkConfig;
+	}
+
+	public static CoordinatorRegistryCenter getRegCenter() {
+		return regCenter;
+	}
+
+	public static void setRegCenter(CoordinatorRegistryCenter regCenter) {
+		AbstractBaseStdJobTest.regCenter = regCenter;
+	}
+
+	public LocalHostService getLocalHostService() {
+		return localHostService;
+	}
+
+	public JobConfiguration getJobConfig() {
+		return jobConfig;
+	}
+
+	public JobScheduler getJobScheduler() {
+		return jobScheduler;
+	}
+
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	public int getMonitorPort() {
+		return monitorPort;
+	}
+
+	public LeaderElectionService getLeaderElectionService() {
+		return leaderElectionService;
+	}
+
+	public String getJobName() {
+		return jobName;
+	}
+    
+    
 }

@@ -2,7 +2,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dangdang</groupId>
     <artifactId>elastic-job</artifactId>
+<<<<<<< HEAD
     <version>1.0.7-SNAPSHOT</version>
+=======
+    <version>1.0.7.cmffix</version>
+>>>>>>> branch
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Elastic-Job - distributed scheduled job solution</description>
@@ -14,7 +18,7 @@
     </modules>
     
     <properties>
-        <java.version>1.7</java.version>
+        <java.version>1.6</java.version>
         <maven.version.range>[3.0.4,)</maven.version.range>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.locale>zh_CN</project.build.locale>
@@ -33,7 +37,7 @@
         <sitemesh.version>2.4.2</sitemesh.version>
         <commons-codec.version>1.10</commons-codec.version>
         
-        <javaee-web-api.version>7.0</javaee-web-api.version>
+        <javaee-web-api.version>6.0</javaee-web-api.version>
         
         <junit.version>4.12</junit.version>
         <unitils.core.version>3.4.2</unitils.core.version>

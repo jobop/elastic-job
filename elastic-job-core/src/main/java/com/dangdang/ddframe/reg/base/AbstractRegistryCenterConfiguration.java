@@ -25,8 +25,6 @@ import lombok.Setter;
  * 
  * @author zhangliang
  */
-@Getter
-@Setter
 public abstract class AbstractRegistryCenterConfiguration {
     
     /**
@@ -38,4 +36,22 @@ public abstract class AbstractRegistryCenterConfiguration {
      * 是否允许本地值覆盖注册中心.
      */
     private boolean overwrite;
+
+	public String getLocalPropertiesPath() {
+		return localPropertiesPath;
+	}
+
+	public void setLocalPropertiesPath(String localPropertiesPath) {
+		this.localPropertiesPath = localPropertiesPath;
+	}
+
+	public boolean isOverwrite() {
+		return overwrite;
+	}
+
+	public void setOverwrite(boolean overwrite) {
+		this.overwrite = overwrite;
+	}
+    
+    
 }

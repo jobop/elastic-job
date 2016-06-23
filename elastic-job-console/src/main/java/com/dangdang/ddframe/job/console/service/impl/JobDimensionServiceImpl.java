@@ -48,7 +48,7 @@ public class JobDimensionServiceImpl implements JobDimensionService {
     @Override
     public Collection<JobBriefInfo> getAllJobsBriefInfo() {
         List<String> jobNames = curatorRepository.getChildren("/");
-        List<JobBriefInfo> result = new ArrayList<>(jobNames.size());
+        List<JobBriefInfo> result = new ArrayList<JobBriefInfo>(jobNames.size());
         for (String each : jobNames) {
             JobBriefInfo jobBriefInfo = new JobBriefInfo();
             jobBriefInfo.setJobName(each);
@@ -142,7 +142,7 @@ public class JobDimensionServiceImpl implements JobDimensionService {
     public Collection<JobServer> getServers(final String jobName) {
         List<String> serverIps = curatorRepository.getChildren(JobNodePath.getServerNodePath(jobName));
         String leaderIp = curatorRepository.getData(JobNodePath.getLeaderNodePath(jobName, "election/host"));
-        Collection<JobServer> result = new ArrayList<>(serverIps.size());
+        Collection<JobServer> result = new ArrayList<JobServer>(serverIps.size());
         for (String each : serverIps) {
             result.add(getJobServer(jobName, leaderIp, each));
         }
@@ -178,7 +178,7 @@ public class JobDimensionServiceImpl implements JobDimensionService {
             return Collections.emptyList();
         }
         List<String> items = curatorRepository.getChildren(executionRootPath);
-        List<ExecutionInfo> result = new ArrayList<>(items.size());
+        List<ExecutionInfo> result = new ArrayList<ExecutionInfo>(items.size());
         for (String each : items) {
             result.add(getExecutionInfo(jobName, each));
         }

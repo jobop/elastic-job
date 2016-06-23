@@ -36,7 +36,7 @@ public final class OdevitySortByNameJobShardingStrategyTest {
     
     @Test
     public void assertShardingByAsc() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Collections.singletonList(0));
         expected.put("host1", Collections.singletonList(1));
         expected.put("host2", Collections.<Integer>emptyList());
@@ -46,7 +46,7 @@ public final class OdevitySortByNameJobShardingStrategyTest {
     
     @Test
     public void assertShardingByDesc() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host2", Collections.singletonList(0));
         expected.put("host1", Collections.singletonList(1));
         expected.put("host0", Collections.<Integer>emptyList());

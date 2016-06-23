@@ -17,16 +17,6 @@
 
 package com.dangdang.ddframe.job.internal.job.dataflow;
 
-import com.dangdang.ddframe.job.api.DataFlowElasticJob;
-import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
-import com.dangdang.ddframe.job.api.JobExecutionSingleShardingContext;
-import com.dangdang.ddframe.job.internal.job.AbstractElasticJob;
-import com.dangdang.ddframe.job.internal.job.AbstractJobExecutionShardingContext;
-import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
-import org.quartz.JobExecutionException;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -37,6 +27,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.dangdang.ddframe.job.api.DataFlowElasticJob;
+import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
+import com.dangdang.ddframe.job.api.JobExecutionSingleShardingContext;
+import com.dangdang.ddframe.job.internal.job.AbstractElasticJob;
+import com.dangdang.ddframe.job.internal.job.AbstractJobExecutionShardingContext;
+import com.google.common.collect.Lists;
+
 /**
  * 用于处理数据流程的作业抽象类.
  * 
@@ -45,9 +47,8 @@ import java.util.concurrent.Executors;
  * @param <T> 数据流作业处理的数据实体类型
  * @param <C> 作业运行时分片上下文类型
  */
-@Slf4j
 public abstract class AbstractDataFlowElasticJob<T, C extends AbstractJobExecutionShardingContext> extends AbstractElasticJob implements DataFlowElasticJob<T, C> {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     private final ExecutorService executorService;
     
     private final DataFlowType dataFlowType;
@@ -167,7 +168,7 @@ public abstract class AbstractDataFlowElasticJob<T, C extends AbstractJobExecuti
     
     private Map<Integer, List<T>> fetchDataForSequence(final JobExecutionMultipleShardingContext shardingContext) {
         List<Integer> items = shardingContext.getShardingItems();
-        final Map<Integer, List<T>> result = new ConcurrentHashMap<>(items.size());
+        final Map<Integer, List<T>> result = new ConcurrentHashMap<Integer, List<T>>(items.size());
         final CountDownLatch latch = new CountDownLatch(items.size());
         for (final int each : items) {
             executorService.submit(new Runnable() {

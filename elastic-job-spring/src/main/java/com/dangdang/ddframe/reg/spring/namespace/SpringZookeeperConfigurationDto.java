@@ -22,32 +22,131 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Getter(AccessLevel.PROTECTED)
-@Setter(AccessLevel.PROTECTED)
-@RequiredArgsConstructor
 final class SpringZookeeperConfigurationDto {
-    
-    private final String serverLists;
-    
-    private final String namespace;
-    
-    private final String baseSleepTimeMilliseconds;
-    
-    private final String maxSleepTimeMilliseconds;
-    
-    private final String maxRetries;
-    
-    private String sessionTimeoutMilliseconds;
-    
-    private String connectionTimeoutMilliseconds;
-    
-    private String digest;
-    
-    private String nestedPort;
-    
-    private String nestedDataDir;
-    
-    private String localPropertiesPath;
-    
-    private String overwrite;
+	public SpringZookeeperConfigurationDto(String serverLists, String namespace, String baseSleepTimeMilliseconds, String maxSleepTimeMilliseconds, String maxRetries) {
+		super();
+		this.serverLists = serverLists;
+		this.namespace = namespace;
+		this.baseSleepTimeMilliseconds = baseSleepTimeMilliseconds;
+		this.maxSleepTimeMilliseconds = maxSleepTimeMilliseconds;
+		this.maxRetries = maxRetries;
+	}
+
+	public SpringZookeeperConfigurationDto(String serverLists, String namespace, String baseSleepTimeMilliseconds, String maxSleepTimeMilliseconds, String maxRetries,
+			String sessionTimeoutMilliseconds, String connectionTimeoutMilliseconds, String digest, String nestedPort, String nestedDataDir, String localPropertiesPath, String overwrite) {
+		super();
+		this.serverLists = serverLists;
+		this.namespace = namespace;
+		this.baseSleepTimeMilliseconds = baseSleepTimeMilliseconds;
+		this.maxSleepTimeMilliseconds = maxSleepTimeMilliseconds;
+		this.maxRetries = maxRetries;
+		this.sessionTimeoutMilliseconds = sessionTimeoutMilliseconds;
+		this.connectionTimeoutMilliseconds = connectionTimeoutMilliseconds;
+		this.digest = digest;
+		this.nestedPort = nestedPort;
+		this.nestedDataDir = nestedDataDir;
+		this.localPropertiesPath = localPropertiesPath;
+		this.overwrite = overwrite;
+	}
+
+	private final String serverLists;
+
+	private final String namespace;
+
+	private final String baseSleepTimeMilliseconds;
+
+	private final String maxSleepTimeMilliseconds;
+
+	private final String maxRetries;
+
+	private String sessionTimeoutMilliseconds;
+
+	private String connectionTimeoutMilliseconds;
+
+	private String digest;
+
+	private String nestedPort;
+
+	private String nestedDataDir;
+
+	private String localPropertiesPath;
+
+	private String overwrite;
+
+	public String getSessionTimeoutMilliseconds() {
+		return sessionTimeoutMilliseconds;
+	}
+
+	public void setSessionTimeoutMilliseconds(String sessionTimeoutMilliseconds) {
+		this.sessionTimeoutMilliseconds = sessionTimeoutMilliseconds;
+	}
+
+	public String getConnectionTimeoutMilliseconds() {
+		return connectionTimeoutMilliseconds;
+	}
+
+	public void setConnectionTimeoutMilliseconds(String connectionTimeoutMilliseconds) {
+		this.connectionTimeoutMilliseconds = connectionTimeoutMilliseconds;
+	}
+
+	public String getDigest() {
+		return digest;
+	}
+
+	public void setDigest(String digest) {
+		this.digest = digest;
+	}
+
+	public String getNestedPort() {
+		return nestedPort;
+	}
+
+	public void setNestedPort(String nestedPort) {
+		this.nestedPort = nestedPort;
+	}
+
+	public String getNestedDataDir() {
+		return nestedDataDir;
+	}
+
+	public void setNestedDataDir(String nestedDataDir) {
+		this.nestedDataDir = nestedDataDir;
+	}
+
+	public String getLocalPropertiesPath() {
+		return localPropertiesPath;
+	}
+
+	public void setLocalPropertiesPath(String localPropertiesPath) {
+		this.localPropertiesPath = localPropertiesPath;
+	}
+
+	public String getOverwrite() {
+		return overwrite;
+	}
+
+	public void setOverwrite(String overwrite) {
+		this.overwrite = overwrite;
+	}
+
+	public String getServerLists() {
+		return serverLists;
+	}
+
+	public String getNamespace() {
+		return namespace;
+	}
+
+	public String getBaseSleepTimeMilliseconds() {
+		return baseSleepTimeMilliseconds;
+	}
+
+	public String getMaxSleepTimeMilliseconds() {
+		return maxSleepTimeMilliseconds;
+	}
+
+	public String getMaxRetries() {
+		return maxRetries;
+	}
+
 }

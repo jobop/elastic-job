@@ -36,10 +36,20 @@ import com.dangdang.ddframe.test.AbstractZookeeperJUnit4SpringContextTests;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public abstract class AbstractJobSpringIntegrateTest extends AbstractZookeeperJUnit4SpringContextTests {
-    
-    private final String simpleJobName;
+	public AbstractJobSpringIntegrateTest(String simpleJobName, String throughputDataFlowJobName){
+		super();
+		this.simpleJobName = simpleJobName;
+		this.throughputDataFlowJobName = throughputDataFlowJobName;
+	}
+    public AbstractJobSpringIntegrateTest(String simpleJobName, String throughputDataFlowJobName, CoordinatorRegistryCenter regCenter) {
+		super();
+		this.simpleJobName = simpleJobName;
+		this.throughputDataFlowJobName = throughputDataFlowJobName;
+		this.regCenter = regCenter;
+	}
+
+	private final String simpleJobName;
     
     private final String throughputDataFlowJobName;
     

@@ -26,12 +26,16 @@ import com.dangdang.ddframe.job.plugin.job.type.dataflow.AbstractBatchThroughput
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public final class FooUnstreamingBatchThroughputDataFlowElasticJob extends AbstractBatchThroughputDataFlowElasticJob<Object> {
     
     private final JobCaller jobCaller;
     
-    @Override
+    public FooUnstreamingBatchThroughputDataFlowElasticJob(JobCaller jobCaller) {
+		super();
+		this.jobCaller = jobCaller;
+	}
+
+	@Override
     public List<Object> fetchData(final JobExecutionMultipleShardingContext shardingContext) {
         return jobCaller.fetchData();
     }

@@ -33,7 +33,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@Getter(AccessLevel.PROTECTED)
 public abstract class AbstractUnstreamingThroughputDataFlowElasticJobTest extends AbstractDataFlowElasticJobTest {
     
     @Test

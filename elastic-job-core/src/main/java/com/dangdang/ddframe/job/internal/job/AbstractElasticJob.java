@@ -17,15 +17,15 @@
 
 package com.dangdang.ddframe.job.internal.job;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dangdang.ddframe.job.api.ElasticJob;
 import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
 import com.dangdang.ddframe.job.internal.schedule.JobFacade;
 import com.dangdang.ddframe.job.internal.schedule.JobRegistry;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 /**
  * 弹性化分布式作业的基类.
@@ -33,13 +33,15 @@ import org.quartz.JobExecutionException;
  * @author zhangliang
  * @author caohao
  */
-@Slf4j
 public abstract class AbstractElasticJob implements ElasticJob {
-    
-    @Getter(AccessLevel.PROTECTED)
+    private Logger log =LoggerFactory.getLogger(AbstractElasticJob.class);
     private JobFacade jobFacade;
     
-    @Override
+    public JobFacade getJobFacade() {
+		return jobFacade;
+	}
+
+	@Override
     public final void execute(final JobExecutionContext context) throws JobExecutionException {
         log.trace("Elastic job: job execute begin, job execution context:{}.", context);
         jobFacade.checkMaxTimeDiffSecondsTolerable();

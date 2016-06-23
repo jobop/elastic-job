@@ -38,7 +38,6 @@ public abstract class AbstractDistributeOnceElasticJobListener implements Elasti
     
     private final Object completedWait = new Object();
     
-    @Setter
     private GuaranteeService guaranteeService;
     
     private TimeService timeService = new TimeService();
@@ -131,4 +130,38 @@ public abstract class AbstractDistributeOnceElasticJobListener implements Elasti
             completedWait.notifyAll();
         }
     }
+
+	public GuaranteeService getGuaranteeService() {
+		return guaranteeService;
+	}
+
+	public void setGuaranteeService(GuaranteeService guaranteeService) {
+		this.guaranteeService = guaranteeService;
+	}
+
+	public TimeService getTimeService() {
+		return timeService;
+	}
+
+	public void setTimeService(TimeService timeService) {
+		this.timeService = timeService;
+	}
+
+	public long getStartedTimeoutMilliseconds() {
+		return startedTimeoutMilliseconds;
+	}
+
+	public Object getStartedWait() {
+		return startedWait;
+	}
+
+	public long getCompletedTimeoutMilliseconds() {
+		return completedTimeoutMilliseconds;
+	}
+
+	public Object getCompletedWait() {
+		return completedWait;
+	}
+    
+    
 }

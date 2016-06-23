@@ -128,7 +128,7 @@ public class ServerService {
      */
     public List<String> getAvailableServers() {
         List<String> servers = getAllServers();
-        List<String> result = new ArrayList<>(servers.size());
+        List<String> result = new ArrayList<String>(servers.size());
         for (String each : servers) {
             if (isAvailableServer(each)) {
                 result.add(each);

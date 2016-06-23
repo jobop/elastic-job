@@ -22,8 +22,6 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public final class JobBriefInfo implements Serializable, Comparable<JobBriefInfo> {
     
     private static final long serialVersionUID = 8405751873086755148L;
@@ -63,4 +61,38 @@ public final class JobBriefInfo implements Serializable, Comparable<JobBriefInfo
             return JobStatus.OK;
         }
     }
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+
+	public JobStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(JobStatus status) {
+		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCron() {
+		return cron;
+	}
+
+	public void setCron(String cron) {
+		this.cron = cron;
+	}
+    
+    
 }

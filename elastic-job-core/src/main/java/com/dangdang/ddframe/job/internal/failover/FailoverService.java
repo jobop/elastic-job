@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.dangdang.ddframe.job.api.JobConfiguration;
 import com.dangdang.ddframe.job.internal.env.LocalHostService;
 import com.dangdang.ddframe.job.internal.execution.ExecutionNode;
@@ -31,16 +34,13 @@ import com.dangdang.ddframe.job.internal.storage.JobNodeStorage;
 import com.dangdang.ddframe.job.internal.storage.LeaderExecutionCallback;
 import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * 作业失效转移服务.
  * 
  * @author zhangliang
  */
-@Slf4j
 public class FailoverService {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     private final LocalHostService localHostService = new LocalHostService();
     
     private final JobConfiguration jobConfiguration;
@@ -105,7 +105,7 @@ public class FailoverService {
      */
     public List<Integer> getLocalHostFailoverItems() {
         List<String> items = jobNodeStorage.getJobNodeChildrenKeys(ExecutionNode.ROOT);
-        List<Integer> result = new ArrayList<>(items.size());
+        List<Integer> result = new ArrayList<Integer>(items.size());
         String ip = localHostService.getIp();
         for (String each : items) {
             int item = Integer.parseInt(each);
@@ -125,7 +125,7 @@ public class FailoverService {
      */
     public List<Integer> getLocalHostTakeOffItems() {
         List<Integer> shardingItems = shardingService.getLocalHostShardingItems();
-        List<Integer> result = new ArrayList<>(shardingItems.size());
+        List<Integer> result = new ArrayList<Integer>(shardingItems.size());
         for (int each : shardingItems) {
             if (jobNodeStorage.isJobNodeExisted(FailoverNode.getExecutionFailoverNode(each))) {
                 result.add(each);

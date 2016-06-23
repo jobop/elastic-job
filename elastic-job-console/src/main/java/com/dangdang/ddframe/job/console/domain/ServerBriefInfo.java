@@ -22,8 +22,6 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public final class ServerBriefInfo implements Serializable, Comparable<ServerBriefInfo> {
     
     private static final long serialVersionUID = 1133149706443681483L;
@@ -44,4 +42,30 @@ public final class ServerBriefInfo implements Serializable, Comparable<ServerBri
         PARTIAL_ALIVE, 
         ALL_CRASHED
     }
+
+	public String getServerIp() {
+		return serverIp;
+	}
+
+	public void setServerIp(String serverIp) {
+		this.serverIp = serverIp;
+	}
+
+	public String getServerHostName() {
+		return serverHostName;
+	}
+
+	public void setServerHostName(String serverHostName) {
+		this.serverHostName = serverHostName;
+	}
+
+	public ServerBriefStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ServerBriefStatus status) {
+		this.status = status;
+	}
+    
+    
 }

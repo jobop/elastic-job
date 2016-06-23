@@ -17,16 +17,11 @@
 
 package com.dangdang.ddframe.job.api;
 
-import com.dangdang.ddframe.job.api.listener.AbstractDistributeOnceElasticJobListener;
-import com.dangdang.ddframe.job.api.listener.ElasticJobListener;
-import com.dangdang.ddframe.job.exception.JobException;
-import com.dangdang.ddframe.job.internal.guarantee.GuaranteeService;
-import com.dangdang.ddframe.job.internal.schedule.JobFacade;
-import com.dangdang.ddframe.job.internal.schedule.JobRegistry;
-import com.dangdang.ddframe.job.internal.schedule.SchedulerFacade;
-import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
-import com.google.common.base.Joiner;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
@@ -37,11 +32,18 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.quartz.impl.StdSchedulerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import com.dangdang.ddframe.job.api.listener.AbstractDistributeOnceElasticJobListener;
+import com.dangdang.ddframe.job.api.listener.ElasticJobListener;
+import com.dangdang.ddframe.job.exception.JobException;
+import com.dangdang.ddframe.job.internal.guarantee.GuaranteeService;
+import com.dangdang.ddframe.job.internal.schedule.JobFacade;
+import com.dangdang.ddframe.job.internal.schedule.JobRegistry;
+import com.dangdang.ddframe.job.internal.schedule.SchedulerFacade;
+import com.dangdang.ddframe.reg.base.CoordinatorRegistryCenter;
+import com.google.common.base.Joiner;
 
 /**
  * 作业调度器.
@@ -49,9 +51,8 @@ import java.util.Properties;
  * @author zhangliang
  * @author caohao
  */
-@Slf4j
 public class JobScheduler {
-    
+	private Logger log=LoggerFactory.getLogger(this.getClass());
     private static final String SCHEDULER_INSTANCE_NAME_SUFFIX = "Scheduler";
     
     private static final String CRON_TRIGGER_IDENTITY_SUFFIX = "Trigger";

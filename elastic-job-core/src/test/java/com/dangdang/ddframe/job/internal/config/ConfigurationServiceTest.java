@@ -153,7 +153,7 @@ public final class ConfigurationServiceTest {
     @Test
     public void assertGetShardingItemParameters() {
         when(jobNodeStorage.getJobNodeDataDirectly(ConfigurationNode.SHARDING_ITEM_PARAMETERS)).thenReturn("0=A,1=B,2=C");
-        Map<Integer, String> expected = new HashMap<>(3);
+        Map<Integer, String> expected = new HashMap<Integer, String>(3);
         expected.put(0, "A");
         expected.put(1, "B");
         expected.put(2, "C");

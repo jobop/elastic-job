@@ -56,8 +56,10 @@ public abstract class AbstractXmlRepositoryImpl<E> implements XmlRepository<E> {
         if (!file.exists()) {
             try {
                 return clazz.newInstance();
-            } catch (final InstantiationException | IllegalAccessException ex) {
+            } catch ( InstantiationException ex) {
                 throw new JobConsoleException(ex);
+            }catch( IllegalAccessException ex){
+            	throw new JobConsoleException(ex);
             }
         }
         try {

@@ -25,8 +25,6 @@ import lombok.Setter;
  * 
  * @author zhangliang
  */
-@Getter
-@Setter
 public abstract class AbstractJobExecutionShardingContext {
     
     /**
@@ -54,4 +52,46 @@ public abstract class AbstractJobExecutionShardingContext {
      * 每次抓取的数据量.
      */
     private int fetchDataCount;
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+
+	public int getShardingTotalCount() {
+		return shardingTotalCount;
+	}
+
+	public void setShardingTotalCount(int shardingTotalCount) {
+		this.shardingTotalCount = shardingTotalCount;
+	}
+
+	public String getJobParameter() {
+		return jobParameter;
+	}
+
+	public void setJobParameter(String jobParameter) {
+		this.jobParameter = jobParameter;
+	}
+
+	public boolean isMonitorExecution() {
+		return monitorExecution;
+	}
+
+	public void setMonitorExecution(boolean monitorExecution) {
+		this.monitorExecution = monitorExecution;
+	}
+
+	public int getFetchDataCount() {
+		return fetchDataCount;
+	}
+
+	public void setFetchDataCount(int fetchDataCount) {
+		this.fetchDataCount = fetchDataCount;
+	}
+    
+    
 }

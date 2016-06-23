@@ -30,10 +30,15 @@ import lombok.RequiredArgsConstructor;
  * 
  * @author zhangliang
  */
-@RequiredArgsConstructor
 public final class JobTriggerListener extends TriggerListenerSupport {
     
-    private final ExecutionService executionService;
+    public JobTriggerListener(ExecutionService executionService, ShardingService shardingService) {
+		super();
+		this.executionService = executionService;
+		this.shardingService = shardingService;
+	}
+
+	private final ExecutionService executionService;
     
     private final ShardingService shardingService;
     

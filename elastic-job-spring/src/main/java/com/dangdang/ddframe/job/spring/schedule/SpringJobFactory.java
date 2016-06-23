@@ -17,14 +17,14 @@
 
 package com.dangdang.ddframe.job.spring.schedule;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.simpl.PropertySettingJobFactory;
 import org.quartz.spi.TriggerFiredBundle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -38,39 +38,45 @@ import com.google.common.base.Preconditions;
  * 
  * @author zhangliang
  */
-@Slf4j
 public final class SpringJobFactory extends PropertySettingJobFactory {
-    
-    private static ApplicationContext applicationContext;
-    
-    public static void setApplicationContext(final ApplicationContext context) throws BeansException {
-        applicationContext = context;
-    }
-    
-    @Override
-    public Job newJob(final TriggerFiredBundle bundle, final Scheduler scheduler) throws SchedulerException {
-        Preconditions.checkNotNull(applicationContext, "applicationContext cannot be null, should call setApplicationContext first.");
-        Job job = null;
-        try {
-            for (Job each : applicationContext.getBeansOfType(Job.class).values()) {
-                if (AopUtils.getTargetClass(each) == bundle.getJobDetail().getJobClass()) {
-                    job = each;
-                    break;
-                }
-            }
-            if (null == job) {
-                throw new NoSuchBeanDefinitionException("");
-            }
-        } catch (final BeansException ex) {
-            log.info("Elastic job: cannot found bean for class: '{}'. This job is not managed for spring.", bundle.getJobDetail().getJobClass().getCanonicalName());
-            return super.newJob(bundle, scheduler);
-        }
-        JobDataMap jobDataMap = new JobDataMap();
-        jobDataMap.putAll(scheduler.getContext());
-        jobDataMap.putAll(bundle.getJobDetail().getJobDataMap());
-        jobDataMap.putAll(bundle.getTrigger().getJobDataMap());
-        Job target = (Job) AopTargetUtils.getTarget(job);
-        setBeanProps(target, jobDataMap);
-        return target;
-    }
+	private Logger log = LoggerFactory.getLogger(SpringJobFactory.class);
+	private static ApplicationContext applicationContext;
+
+	public static void setApplicationContext(final ApplicationContext context) throws BeansException {
+		applicationContext = context;
+	}
+
+	@Override
+	public Job newJob(final TriggerFiredBundle bundle, final Scheduler scheduler) throws SchedulerException {
+		Preconditions.checkNotNull(applicationContext, "applicationContext cannot be null, should call setApplicationContext first.");
+		Job job = null;
+		try {
+
+			// for (Job each :
+			// applicationContext.getBeansOfType(Job.class).values()) {
+			// if (AopUtils.getTargetClass(each) ==
+			// bundle.getJobDetail().getJobClass()) {
+			// job = each;
+			// break;
+			// }
+			// }
+			Object bean = applicationContext.getBean(bundle.getJobDetail().getKey().getName());
+			if (null != bean && AopUtils.getTargetClass(bean)==bundle.getJobDetail().getJobClass()) {
+				job = (Job)bean;
+			}
+			if (null == job) {
+				throw new NoSuchBeanDefinitionException("");
+			}
+		} catch (final BeansException ex) {
+			log.info("Elastic job: cannot found bean for class: '{}'. This job is not managed for spring.", bundle.getJobDetail().getJobClass().getCanonicalName());
+			return super.newJob(bundle, scheduler);
+		}
+		JobDataMap jobDataMap = new JobDataMap();
+		jobDataMap.putAll(scheduler.getContext());
+		jobDataMap.putAll(bundle.getJobDetail().getJobDataMap());
+		jobDataMap.putAll(bundle.getTrigger().getJobDataMap());
+		Job target = (Job) AopTargetUtils.getTarget(job);
+		setBeanProps(target, jobDataMap);
+		return target;
+	}
 }

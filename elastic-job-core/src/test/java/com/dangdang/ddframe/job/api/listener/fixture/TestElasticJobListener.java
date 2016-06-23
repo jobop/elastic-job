@@ -21,10 +21,14 @@ import com.dangdang.ddframe.job.api.JobExecutionMultipleShardingContext;
 import com.dangdang.ddframe.job.api.listener.ElasticJobListener;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public final class TestElasticJobListener implements ElasticJobListener {
     
-    private final ElasticJobListenerCaller caller;
+    public TestElasticJobListener(ElasticJobListenerCaller caller) {
+		super();
+		this.caller = caller;
+	}
+
+	private final ElasticJobListenerCaller caller;
     
     @Override
     public void beforeJobExecuted(final JobExecutionMultipleShardingContext shardingContext) {

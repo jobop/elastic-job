@@ -55,7 +55,7 @@ public final class JobExecutionMultipleShardingContextTest {
         result.setShardingTotalCount(10);
         result.setShardingItems(Arrays.asList(0, 1));
         result.getShardingItemParameters().put(0, "param0");
-        Map<Integer, String> offsets = new HashMap<>(2);
+        Map<Integer, String> offsets = new HashMap<Integer, String>(2);
         offsets.put(0, "offset0");
         offsets.put(1, "offset1");
         result.setOffsets(offsets);

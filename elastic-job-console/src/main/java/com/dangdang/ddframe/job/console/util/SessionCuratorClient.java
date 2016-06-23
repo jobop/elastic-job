@@ -21,7 +21,7 @@ import org.apache.curator.framework.CuratorFramework;
 
 public final class SessionCuratorClient {
     
-    private static ThreadLocal<CuratorFramework> curatorClient = new ThreadLocal<>();
+    private static ThreadLocal<CuratorFramework> curatorClient = new ThreadLocal<CuratorFramework>();
     
     private SessionCuratorClient() {
     }

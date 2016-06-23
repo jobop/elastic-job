@@ -17,22 +17,20 @@
 
 package com.dangdang.ddframe.reg.exception;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.KeeperException.ConnectionLossException;
 import org.apache.zookeeper.KeeperException.NoNodeException;
 import org.apache.zookeeper.KeeperException.NodeExistsException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 抛出RegException的异常处理类.
  * 
  * @author zhangliang
  */
-@Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RegExceptionHandler {
-    
+	private static Logger log=LoggerFactory.getLogger(RegExceptionHandler.class);
+	public RegExceptionHandler(){}
     /**
      * 处理掉中断和连接失效异常并继续抛出RegException.
      * 

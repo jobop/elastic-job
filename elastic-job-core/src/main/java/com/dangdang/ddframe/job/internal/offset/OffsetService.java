@@ -58,7 +58,7 @@ public class OffsetService {
      * @return 数据分片项和数据处理位置Map
      */
     public Map<Integer, String> getOffsets(final List<Integer> items) {
-        Map<Integer, String> result = new HashMap<>(items.size());
+        Map<Integer, String> result = new HashMap<Integer, String>(items.size());
         for (int each : items) {
             String offset = jobNodeStorage.getJobNodeDataDirectly(OffsetNode.getItemNode(each));
             if (!Strings.isNullOrEmpty(offset)) {

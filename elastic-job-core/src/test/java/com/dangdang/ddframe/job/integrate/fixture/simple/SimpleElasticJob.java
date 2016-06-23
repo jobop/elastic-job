@@ -24,7 +24,6 @@ import com.dangdang.ddframe.job.plugin.job.type.simple.AbstractSimpleElasticJob;
 
 public final class SimpleElasticJob extends AbstractSimpleElasticJob {
     
-    @Getter
     private static volatile boolean completed;
     
     @Override
@@ -35,4 +34,14 @@ public final class SimpleElasticJob extends AbstractSimpleElasticJob {
     public static void reset() {
         completed = false;
     }
+
+	public static boolean isCompleted() {
+		return completed;
+	}
+
+	public static void setCompleted(boolean completed) {
+		SimpleElasticJob.completed = completed;
+	}
+    
+    
 }

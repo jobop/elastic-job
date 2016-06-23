@@ -36,7 +36,7 @@ public final class RotateServerByNameJobShardingStrategyTest {
     
     @Test
     public void assertSharding1() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Collections.<Integer>emptyList());
         expected.put("host1", Collections.singletonList(0));
         expected.put("host2", Collections.singletonList(1));
@@ -46,7 +46,7 @@ public final class RotateServerByNameJobShardingStrategyTest {
     
     @Test
     public void assertSharding2() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Collections.singletonList(1));
         expected.put("host1", Collections.<Integer>emptyList());
         expected.put("host2", Collections.singletonList(0));
@@ -56,7 +56,7 @@ public final class RotateServerByNameJobShardingStrategyTest {
     
     @Test
     public void assertSharding3() {
-        Map<String, List<Integer>> expected = new LinkedHashMap<>(3);
+        Map<String, List<Integer>> expected = new LinkedHashMap<String, List<Integer>>(3);
         expected.put("host0", Collections.singletonList(0));
         expected.put("host1", Collections.singletonList(1));
         expected.put("host2", Collections.<Integer>emptyList());

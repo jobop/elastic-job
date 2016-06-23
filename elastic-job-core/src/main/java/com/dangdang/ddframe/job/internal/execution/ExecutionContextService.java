@@ -82,7 +82,7 @@ public class ExecutionContextService {
     }
     
     private void removeRunningItems(final List<Integer> items) {
-        List<Integer> toBeRemovedItems = new ArrayList<>(items.size());
+        List<Integer> toBeRemovedItems = new ArrayList<Integer>(items.size());
         for (int each : items) {
             if (isRunningItem(each)) {
                 toBeRemovedItems.add(each);

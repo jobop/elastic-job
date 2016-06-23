@@ -24,10 +24,14 @@ import com.dangdang.ddframe.job.plugin.job.type.dataflow.AbstractIndividualThrou
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public final class FooStreamingIndividualThroughputDataFlowElasticJob extends AbstractIndividualThroughputDataFlowElasticJob<Object> {
     
-    private final JobCaller jobCaller;
+    public FooStreamingIndividualThroughputDataFlowElasticJob(JobCaller jobCaller) {
+		super();
+		this.jobCaller = jobCaller;
+	}
+
+	private final JobCaller jobCaller;
     
     @Override
     public List<Object> fetchData(final JobExecutionMultipleShardingContext shardingContext) {

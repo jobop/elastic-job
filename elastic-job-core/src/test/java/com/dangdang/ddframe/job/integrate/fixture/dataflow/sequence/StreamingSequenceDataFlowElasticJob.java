@@ -27,7 +27,7 @@ import com.dangdang.ddframe.job.plugin.job.type.dataflow.AbstractIndividualSeque
 
 public final class StreamingSequenceDataFlowElasticJob extends AbstractIndividualSequenceDataFlowElasticJob<String> {
     
-    private static volatile Set<String> processedData = new CopyOnWriteArraySet<>();
+    private static volatile Set<String> processedData = new CopyOnWriteArraySet<String>();
     
     private static volatile List<String> result = Arrays.asList("data0", "data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9");
     
